@@ -150,23 +150,19 @@ compareRobots(routeRobot, [], goalOrientedRobot, []);
 
 //Task3 - Persistent group
 
-class PersistentGroup {
+class PGroup {
   constructor(elements) {
     this.elements = elements;
   }
 
   add(element) {
-    if (this.has(element)) {
-        return this;
-    }
-    return new PersistentGroup(this.elements.concat([element]));
+    if (this.has(element)) return this;
+    return new PGroup(this.elements.concat([element]));
   }
 
-  remove(element) {
-    if (!this.has(element)) {
-        return this;
-    }
-    return new PersistentGroup(this.elements.filter(value => value !== element));
+  delete(element) {
+    if (!this.has(element)) return this;
+    return new PGroup(this.elements.filter(value => value !== element));
   }
 
   has(element) {
@@ -174,11 +170,11 @@ class PersistentGroup {
   }
 }
 
-PersistentGroup.empty = new PersistentGroup([]);
+PGroup.empty = new PGroup([]);
 
-let apple = PersistentGroup.empty.add("apple");
+let apple = PGroup.empty.add("apple");
 let apple_orange = apple.add("orange");
-let orange = apple_orange.remove("apple");
+let orange = apple_orange.delete("apple");
 
 console.log(apple_orange.has('orange'))
 console.log(apple.has('orange'))
